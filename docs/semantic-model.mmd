@@ -1,0 +1,46 @@
+erDiagram
+    Ativo {
+        string asset_id PK
+        string asset_name
+    }
+    Instalacao {
+        string facility_id PK
+        string facility_name
+    }
+    Poco {
+        string well_id PK
+        string asset_id FK
+        string facility_id FK
+    }
+    Periodo {
+        string period_id PK
+        string week_start
+        string week_end
+    }
+    Meta {
+        string target_id PK
+        string well_id FK
+        string period_id FK
+        string planned_bopd
+    }
+    Producao {
+        string production_id PK
+        string well_id FK
+        string period_id FK
+        string actual_bopd
+        string downtime_hours
+    }
+    Indicador {
+        string metric_id PK
+        string metric_name
+        string definition
+        string version
+    }
+    Instalacao ||--o{ Poco : relaciona
+    Ativo ||--o{ Poco : relaciona
+    Poco ||--o{ Producao : relaciona
+    Poco ||--o{ Meta : relaciona
+    Periodo ||--o{ Producao : relaciona
+    Periodo ||--o{ Meta : relaciona
+    Producao }o--|| Indicador : relaciona
+    Meta }o--|| Indicador : relaciona
