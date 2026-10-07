@@ -1,5 +1,11 @@
 from datetime import datetime
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[2]
+root_path = str(ROOT)
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
 
 import pandas as pd
 import plotly.express as px
@@ -23,7 +29,6 @@ from src.ingestion.simulated_api import SimulatedEandPApiSource
 from src.transformation.quality import NUMERIC_COLUMNS, QualityIssue, normalize_and_validate
 
 
-ROOT = Path(__file__).resolve().parents[2]
 AUDIT_DATABASE = ROOT / "data" / "audit.db"
 DIAGRAM_PATH = ROOT / "docs" / "semantic-model.mmd"
 COLORS = {"ink": "#152523", "green": "#176B5B", "lime": "#C8D94A", "red": "#C44936", "muted": "#697572", "grid": "#E2E8E4"}
